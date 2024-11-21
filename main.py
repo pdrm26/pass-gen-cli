@@ -3,7 +3,7 @@ from string import digits, punctuation, ascii_lowercase, ascii_uppercase, printa
 import argparse
 
 
-def create_password(length=8, digit=False, upper=False, lower=False, pun=False):
+def create_password(length=10, digit=False, upper=False, lower=False, pun=False):
     available_characters = ""
 
     if digit:
