@@ -1,5 +1,6 @@
 from random import choices
 from string import digits, punctuation, ascii_lowercase, ascii_uppercase, printable
+import argparse
 
 
 def create_password(length=8, digit=False, upper=False, lower=False, pun=False):
@@ -26,10 +27,23 @@ def create_password(length=8, digit=False, upper=False, lower=False, pun=False):
 
 
 if __name__ == "__main__":
-    print(create_password())
-    print(create_password(12))
-    print(create_password(upper=True))
-    print(create_password(lower=True))
-    print(create_password(upper=True, digit=True))
-    print(create_password(130, lower=True, digit=True, pun=True))
-    print(create_password(lower=False, digit=False, pun=False))
+    parser = argparse.ArgumentParser(
+        prog='Password generator CLI',
+        description="You can generate random password with any length you want with any characters you want.",
+    )
+
+    parser.add_argument('-c', '--length', type=int, default=10,
+                        help="Specify the length of the password.")
+    parser.add_argument('-d', '--digit', action='store_true',
+                        help="Include digits (0-9) in the password.")
+    parser.add_argument('-u', '--upper', action='store_true',
+                        help="Include uppercase letters (A-Z) in the password.")
+    parser.add_argument('-l', '--lower', action='store_true',
+                        help="Include lowercase letters (a-z) in the password.")
+    parser.add_argument('-p', '--punc', action='store_true',
+                        help="Include punctuation/special characters in the password.")
+
+    args = parser.parse_args()
+
+    print(create_password(args.length, digit=args.digit,
+          upper=args.upper, lower=args.lower, pun=args.punc))
